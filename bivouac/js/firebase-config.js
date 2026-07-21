@@ -26,14 +26,12 @@ const HIKES_DATA = {
 //  DATES PROPOSÉES
 // ============================================================
 const DATES_DATA = [
-  { id: "sep06", label: "Sam 6 – Dim 7 sept.", month: "sep" },
-  { id: "sep13", label: "Sam 13 – Dim 14 sept.", month: "sep" },
-  { id: "sep20", label: "Sam 20 – Dim 21 sept.", month: "sep" },
-  { id: "sep27", label: "Sam 27 – Dim 28 sept.", month: "sep" },
-  { id: "oct04", label: "Sam 4 – Dim 5 oct.", month: "oct" },
-  { id: "oct11", label: "Sam 11 – Dim 12 oct.", month: "oct" },
-  { id: "oct18", label: "Sam 18 – Dim 19 oct.", month: "oct" },
-  { id: "oct25", label: "Sam 25 – Dim 26 oct.", month: "oct" }
+  { id: "juillet", label: "Sam 25 – Dim 26 juillet.", month: "juillet" },
+  { id: "Aout", label: "Sam 1 – Dim 2 Aout.", month: "Aout" },
+  { id: "Aout", label: "Sam 8 – Dim 9 Aout.", month: "Aout" },
+  { id: "Aout", label: "Sam 15 – Dim 16 Aout.", month: "Aout" },
+  { id: "Aout", label: "Sam 22 – Dim 23 Aout.", month: "Aout" },
+  { id: "Aout", label: "Sam 29 – Dim 30 Aout.", month: "Aout" },
 ];
 
 // ============================================================
