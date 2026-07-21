@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bivouac Pyrénées 2025</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🏔️ Bivouac Pyrénées 2025</div>
+      <h1 class="hero-title">Une nuit sous les étoiles<br>dans les Pyrénées</h1>
+      <p class="hero-sub">Nous partons pour un bivouac de 2 jours dans les Pyrénées.<br>Vote pour ton itinéraire préféré et indique tes disponibilités<br>afin que l'on choisisse ensemble la meilleure randonnée.</p>
+      <a href="vote.html" class="btn-hero">🗳️ Participer au vote</a>
+      <a href="admin.html" class="btn-hero btn-ghost">📊 Voir les résultats</a>
+    </div>
+    <div class="hero-scroll">↓</div>
+  </section>
+
+  <!-- ITINÉRAIRES APERÇU -->
+  <section class="section-preview">
+    <div class="container">
+      <h2 class="section-title">3 itinéraires au choix</h2>
+      <p class="section-sub">Des randonnées soigneusement sélectionnées pour un bivouac au bord d'un lac</p>
+
+      <div class="preview-grid">
+
+        <div class="preview-card" onclick="window.location='vote.html'">
+          <div class="preview-img" style="background:linear-gradient(160deg,#4a7c5c,#2d5a3d)">
+            <div class="preview-img-inner">
+              <span class="preview-mountain">🏔️</span>
+              <span class="preview-lake">Lac Gentau — 2 000 m</span>
+            </div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-diff diff-moyen">Intermédiaire</div>
+            <h3>Lacs d'Ayous</h3>
+            <p>Face au Pic du Midi d'Ossau. L'un des plus beaux bivouacs des Pyrénées.</p>
+            <div class="preview-stats">
+              <span>📏 19 km</span>
+              <span>⬆ 1 100 m</span>
+              <span>🕒 2 jours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-card" onclick="window.location='vote.html'">
+          <div class="preview-img" style="background:linear-gradient(160deg,#2d6080,#1a3d5a)">
+            <div class="preview-img-inner">
+              <span class="preview-mountain">🌊</span>
+              <span class="preview-lake">Lac d'Aubert — 2 150 m</span>
+            </div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-diff diff-facile">Facile</div>
+            <h3>Réserve du Néouvielle</h3>
+            <p>Le paradis des lacs d'altitude. Plus de 70 lacs dans la réserve naturelle.</p>
+            <div class="preview-stats">
+              <span>📏 16 km</span>
+              <span>⬆ 750 m</span>
+              <span>🕒 2 jours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-card" onclick="window.location='vote.html'">
+          <div class="preview-img" style="background:linear-gradient(160deg,#6b4a7a,#3d2a4a)">
+            <div class="preview-img-inner">
+              <span class="preview-mountain">💧</span>
+              <span class="preview-lake">Lac d'Oô — 1 504 m</span>
+            </div>
+          </div>
+          <div class="preview-body">
+            <div class="preview-diff diff-difficile">Difficile</div>
+            <h3>Lac d'Oô & Cirque de Cézy</h3>
+            <p>Cascade spectaculaire de 273 m. Paysage sauvage et grandiose.</p>
+            <div class="preview-stats">
+              <span>📏 22 km</span>
+              <span>⬆ 1 400 m</span>
+              <span>🕒 2 jours</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="center-btn">
+        <a href="vote.html" class="btn-primary">Voter maintenant →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RÈGLES BIVOUAC -->
+  <section class="section-rules">
+    <div class="container">
+      <h2 class="section-title">📋 Règles du bivouac</h2>
+      <div class="rules-grid">
+        <div class="rule-card">
+          <div class="rule-icon">🕖</div>
+          <h4>Horaires</h4>
+          <p>Tente montée entre 19h et démontée avant 9h du matin</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">🚗</div>
+          <h4>Distance</h4>
+          <p>À plus d'1 heure de marche de tout accès motorisé</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">🌿</div>
+          <h4>Leave No Trace</h4>
+          <p>On emporte tous nos déchets. On laisse la nature comme on l'a trouvée</p>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon">💧</div>
+          <h4>Eau</h4>
+          <p>Filtrer l'eau des lacs et torrents avant de la boire</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Bivouac Pyrénées 2025 — Fait avec ❤️ pour le groupe</p>
+  </footer>
+
+  <script src="js/firebase-config.js"></script>
+</body>
+</html>

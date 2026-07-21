@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Résultats — Bivouac Pyrénées 2025</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<body class="admin-page">
+
+  <nav class="topnav">
+    <a href="index.html" class="nav-logo">🏔️ Bivouac 2025</a>
+    <a href="vote.html" class="nav-link">🗳️ Voter</a>
+  </nav>
+
+  <div class="admin-wrap">
+
+    <div class="admin-header">
+      <h1>📊 Résultats des votes</h1>
+      <p id="totalVotes">Chargement…</p>
+      <button class="btn-refresh" onclick="loadResults()">🔄 Actualiser</button>
+    </div>
+
+    <!-- RÉSULTAT OPTIMAL -->
+    <div class="winner-card" id="winnerCard" style="display:none">
+      <div class="winner-crown">🏆</div>
+      <div class="winner-body">
+        <div class="winner-label">Meilleur choix</div>
+        <div class="winner-hike" id="winnerHike">—</div>
+        <div class="winner-date" id="winnerDate">—</div>
+        <div class="winner-detail" id="winnerDetail">—</div>
+      </div>
+    </div>
+
+    <div class="results-grid">
+
+      <!-- GRAPHIQUE ITINÉRAIRES -->
+      <div class="result-block">
+        <h3>🏔️ Itinéraires préférés</h3>
+        <div id="chartHikes" class="chart-wrap"></div>
+      </div>
+
+      <!-- GRAPHIQUE DATES -->
+      <div class="result-block">
+        <h3>📅 Disponibilités (week-ends)</h3>
+        <div id="chartDates" class="chart-wrap"></div>
+      </div>
+
+    </div>
+
+    <!-- TABLEAU DES PARTICIPANTS -->
+    <div class="result-block full-width">
+      <h3>👥 Participants (<span id="participantCount">0</span>)</h3>
+      <div class="table-wrap">
+        <table id="participantsTable">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Itinéraire(s)</th>
+              <th>Dates disponibles</th>
+              <th>Commentaire</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="participantsBody">
+            <tr><td colspan="5" class="empty-row">Aucun vote pour l'instant</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BOUTON RESET (admin seulement) -->
+    <div class="danger-zone">
+      <details>
+        <summary>⚙️ Options d'administration</summary>
+        <div style="margin-top:1rem">
+          <button class="btn-danger" onclick="resetAll()">🗑️ Supprimer tous les votes</button>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <script src="js/firebase-config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
