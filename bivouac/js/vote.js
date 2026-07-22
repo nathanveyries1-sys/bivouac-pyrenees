@@ -1,279 +1,933 @@
 // ============================================================
-//  VOTE.JS — Logique du formulaire de vote
+// VOTE.JS
+// BIVOUAC PYRÉNÉES 2026
+// Lac de Berseau
 // ============================================================
+
 
 let currentStep = 1;
-let selectedHikes = [];
+
 let selectedDates = [];
 
-const TOTAL_STEPS = 4;
+const TOTAL_STEPS = 3;
+
+
 
 // ============================================================
-//  NAVIGATION ENTRE ÉTAPES
+// NAVIGATION ENTRE LES ÉTAPES
 // ============================================================
-function goStep(n) {
-  // Validation étape 1
-  if (currentStep === 1 && n > 1) {
-    const prenom = document.getElementById('inputPrenom').value.trim();
-    if (!prenom) {
-      document.getElementById('inputPrenom').focus();
-      document.getElementById('inputPrenom').style.borderColor = '#dc2626';
-      return;
+
+
+function goStep(step){
+
+
+    // Validation prénom
+
+    if(currentStep === 1 && step > 1){
+
+
+        const prenom =
+        document.getElementById("inputPrenom")
+        .value
+        .trim();
+
+
+
+        if(!prenom){
+
+            alert(
+            "Entre ton prénom avant de continuer."
+            );
+
+            document
+            .getElementById("inputPrenom")
+            .focus();
+
+            return;
+
+        }
+
     }
-    document.getElementById('inputPrenom').style.borderColor = '';
-  }
 
-  // Validation étape 2
-  if (currentStep === 2 && n > 2) {
-    if (selectedHikes.length === 0) {
-      alert("Choisis au moins un itinéraire avant de continuer !");
-      return;
+
+
+    // Validation dates
+
+    if(currentStep === 2 && step > 2){
+
+
+        if(selectedDates.length === 0){
+
+
+            alert(
+            "Choisis au moins une date disponible."
+            );
+
+
+            return;
+
+
+        }
+
+
+        buildRecap();
+
+
     }
-  }
 
-  // Validation étape 3
-  if (currentStep === 3 && n > 3) {
-    if (selectedDates.length === 0) {
-      alert("Coche au moins une date de disponibilité !");
-      return;
-    }
-    buildRecap();
-  }
 
-  // Masquer étape courante
-  document.getElementById('step' + currentStep).classList.remove('active');
-  document.getElementById('pstep' + currentStep).classList.remove('active');
-  document.getElementById('pstep' + currentStep).classList.add('done');
 
-  currentStep = n;
 
-  // Afficher nouvelle étape
-  document.getElementById('step' + currentStep).classList.add('active');
-  document.getElementById('pstep' + currentStep).classList.add('active');
-  document.getElementById('pstep' + currentStep).classList.remove('done');
+    document
+    .getElementById(
+        "step"+currentStep
+    )
+    ?.classList.remove("active");
 
-  // Mettre à jour la barre de progression
-  const pct = ((currentStep - 1) / TOTAL_STEPS) * 100;
-  document.getElementById('progressFill').style.width = pct + '%';
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 
-// ============================================================
-//  GESTION DES ITINÉRAIRES
-// ============================================================
-function toggleHike(id) {
-  const idx = selectedHikes.indexOf(id);
-  if (idx === -1) {
-    selectedHikes.push(id);
-    document.getElementById('card-' + id).classList.add('selected');
-    document.getElementById('sel-' + id).classList.add('selected');
-    document.getElementById('sel-' + id).innerHTML = '<span class="sel-circle"></span> ✓ Sélectionné';
-  } else {
-    selectedHikes.splice(idx, 1);
-    document.getElementById('card-' + id).classList.remove('selected');
-    document.getElementById('sel-' + id).classList.remove('selected');
-    document.getElementById('sel-' + id).innerHTML = '<span class="sel-circle"></span> Choisir';
-  }
-}
+    document
+    .getElementById(
+        "pstep"+currentStep
+    )
+    ?.classList.remove("active");
 
-// ============================================================
-//  CALENDRIER DES DATES
-// ============================================================
-function buildCalendar() {
-  const gridAug = document.getElementById('datesGridAug');
-  const gridSep = document.getElementById('datesGridSep');
-  if (!gridSep || !gridOct) return;
 
-  DATES_DATA.forEach(d => {
-    const btn = document.createElement('button');
-    btn.className = 'date-btn';
-    btn.id = 'dbtn-' + d.id;
-    btn.innerHTML = `
-      <div class="date-day">${d.label.split(' ')[0]}</div>
-      <div class="date-range">${d.label}</div>
-      <div class="date-check" id="dchk-${d.id}"></div>
-    `;
-    btn.onclick = () => toggleDate(d.id);
-    if (d.month === "aout")gridAug.appendChild(btn);
-    else gridSep.appendChild(btn);
-  });
-}
 
-function toggleDate(id) {
-  const idx = selectedDates.indexOf(id);
-  const btn = document.getElementById('dbtn-' + id);
-  const chk = document.getElementById('dchk-' + id);
-  if (idx === -1) {
-    selectedDates.push(id);
-    btn.classList.add('selected');
-    chk.textContent = '✓ Disponible';
-  } else {
-    selectedDates.splice(idx, 1);
-    btn.classList.remove('selected');
-    chk.textContent = '';
-  }
-}
+    document
+    .getElementById(
+        "pstep"+currentStep
+    )
+    ?.classList.add("done");
 
-// ============================================================
-//  RÉCAPITULATIF AVANT ENVOI
-// ============================================================
-function buildRecap() {
-  const prenom = document.getElementById('inputPrenom').value.trim();
-  const hikesLabels = selectedHikes.map(h => HIKES_DATA[h]?.name || h).join(', ');
-  const datesLabels = selectedDates.map(id => DATES_DATA.find(d => d.id === id)?.label || id).join(', ');
 
-  document.getElementById('voteRecap').innerHTML = `
-    <div class="recap-row">👤 <strong>Prénom :</strong> ${prenom}</div>
-    <div class="recap-row">🏔️ <strong>Itinéraire(s) :</strong> ${hikesLabels}</div>
-    <div class="recap-row">📅 <strong>Dates :</strong> ${datesLabels}</div>
-  `;
-}
 
-// ============================================================
-//  ENVOI DU VOTE
-// ============================================================
-async function submitVote() {
-  const prenom = document.getElementById('inputPrenom').value.trim();
-  const comment = document.getElementById('inputComment').value.trim();
 
-  if (!prenom || selectedHikes.length === 0 || selectedDates.length === 0) {
-    alert("Informations incomplètes !");
-    return;
-  }
+    currentStep = step;
 
-  const btn = document.querySelector('.btn-send');
-  btn.disabled = true;
-  btn.textContent = '⏳ Envoi en cours…';
 
-  try {
-    await saveVote({
-      prenom,
-      hikes: selectedHikes,
-      dates: selectedDates,
-      comment,
+
+    document
+    .getElementById(
+        "step"+currentStep
+    )
+    ?.classList.add("active");
+
+
+
+    document
+    .getElementById(
+        "pstep"+currentStep
+    )
+    ?.classList.add("active");
+
+
+
+    const percent =
+    ((currentStep-1)/(TOTAL_STEPS-1))*100;
+
+
+
+    document
+    .getElementById(
+        "progressFill"
+    )
+    .style.width =
+    percent+"%";
+
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
     });
 
-    // Afficher page succès
-    document.getElementById('step4').classList.remove('active');
-    document.getElementById('stepSuccess').classList.add('active');
-    document.getElementById('progressFill').style.width = '100%';
-    document.getElementById('successMsg').textContent =
-      `Merci ${prenom} ! Ton vote a bien été enregistré. Tu peux voir les résultats en temps réel sur la page des résultats.`;
 
-  } catch(e) {
-    alert("Erreur lors de l'envoi. Réessaie !");
-    btn.disabled = false;
-    btn.textContent = '✅ Envoyer mon vote';
-  }
 }
 
+
+
+
 // ============================================================
-//  RÉINITIALISER POUR UN AUTRE VOTE
+// CALENDRIER DES DATES
 // ============================================================
-function resetVote() {
-  selectedHikes = [];
-  selectedDates = [];
-  currentStep = 1;
-  document.getElementById('inputPrenom').value = '';
-  document.getElementById('inputComment').value = '';
 
-  // Réinitialiser cartes
-  ['ayous', 'neouv', 'oo'].forEach(id => {
-    document.getElementById('card-' + id)?.classList.remove('selected');
-    const sel = document.getElementById('sel-' + id);
-    if (sel) { sel.classList.remove('selected'); sel.innerHTML = '<span class="sel-circle"></span> Choisir'; }
-  });
 
-  // Réinitialiser dates
-  DATES_DATA.forEach(d => {
-    document.getElementById('dbtn-' + d.id)?.classList.remove('selected');
-    const chk = document.getElementById('dchk-' + d.id);
-    if (chk) chk.textContent = '';
-  });
+function buildCalendar(){
 
-  document.getElementById('stepSuccess').classList.remove('active');
-  document.getElementById('step1').classList.add('active');
-  document.getElementById('progressFill').style.width = '0%';
-  document.querySelectorAll('.pstep').forEach((el, i) => {
-    el.classList.remove('active', 'done');
-    if (i === 0) el.classList.add('active');
-  });
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+const aug =
+document.getElementById(
+"datesGridAug"
+);
+
+
+
+const sep =
+document.getElementById(
+"datesGridSep"
+);
+
+
+
+if(!aug || !sep)
+return;
+
+
+
+
+DATES_DATA.forEach(date=>{
+
+
+const button =
+document.createElement(
+"button"
+);
+
+
+
+button.className =
+"date-btn";
+
+
+
+button.id =
+"dbtn-"+date.id;
+
+
+
+button.innerHTML = `
+
+<div class="date-day">
+Disponibilité
+</div>
+
+
+<div class="date-range">
+${date.label}
+</div>
+
+
+<div class="date-check"
+id="dchk-${date.id}">
+</div>
+
+`;
+
+
+
+button.onclick =
+()=>toggleDate(date.id);
+
+
+
+if(date.month==="aout")
+{
+
+aug.appendChild(button);
+
 }
 
-// ============================================================
-//  CARTES LEAFLET
-// ============================================================
-function initMaps() {
-  if (typeof L === 'undefined') return;
+else
+{
 
-  const maps = [
-    {
-      id: 'map-ayous',
-      center: [42.878, -0.467],
-      zoom: 12,
-      start: [42.840, -0.432],
-      bivouac: [42.901, -0.483],
-      startLabel: 'Départ — Gabas',
-      bivouacLabel: 'Bivouac — Lac Gentau',
-      route: [[42.840, -0.432],[42.855, -0.445],[42.870, -0.460],[42.885, -0.472],[42.901, -0.483]]
-    },
-    {
-      id: 'map-neouv',
-      center: [42.835, 0.385],
-      zoom: 12,
-      start: [42.820, 0.395],
-      bivouac: [42.848, 0.372],
-      startLabel: 'Départ — Lac d\'Orédon',
-      bivouacLabel: 'Bivouac — Lac d\'Aubert',
-      route: [[42.820, 0.395],[42.830, 0.388],[42.840, 0.378],[42.848, 0.372]]
-    },
-    {
-      id: 'map-oo',
-      center: [42.805, 0.558],
-      zoom: 12,
-      start: [42.782, 0.567],
-      bivouac: [42.820, 0.548],
-      startLabel: 'Départ — Granges d\'Astau',
-      bivouacLabel: 'Bivouac — Lac d\'Oô',
-      route: [[42.782, 0.567],[42.793, 0.561],[42.806, 0.553],[42.820, 0.548]]
-    }
-  ];
+sep.appendChild(button);
 
-  maps.forEach(m => {
-    const el = document.getElementById(m.id);
-    if (!el) return;
-
-    const map = L.map(m.id, { zoomControl: true, scrollWheelZoom: false }).setView(m.center, m.zoom);
-    L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenTopoMap',
-      maxZoom: 15
-    }).addTo(map);
-
-    // Tracé
-    L.polyline(m.route, { color: '#2d6040', weight: 3, opacity: 0.8 }).addTo(map);
-
-    // Marqueur départ (vert)
-    const iconStart = L.divIcon({ className: '', html: '<div style="width:14px;height:14px;border-radius:50%;background:#22c55e;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>', iconSize: [14,14], iconAnchor: [7,7] });
-    L.marker(m.start, { icon: iconStart }).addTo(map).bindPopup(m.startLabel);
-
-    // Marqueur bivouac (orange)
-    const iconBiv = L.divIcon({ className: '', html: '<div style="width:16px;height:16px;border-radius:50%;background:#f59e0b;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>', iconSize: [16,16], iconAnchor: [8,8] });
-    L.marker(m.bivouac, { icon: iconBiv }).addTo(map).bindPopup(m.bivouacLabel);
-  });
 }
 
-// ============================================================
-//  INIT
-// ============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  buildCalendar();
-  // Attendre que Leaflet soit chargé
-  setTimeout(initMaps, 300);
 
-  // Enter sur le champ prénom
-  const inp = document.getElementById('inputPrenom');
-  if (inp) inp.addEventListener('keydown', e => { if (e.key === 'Enter') goStep(2); });
+
+});
+
+
+
+}
+
+
+
+
+
+function toggleDate(id){
+
+
+const index =
+selectedDates.indexOf(id);
+
+
+
+const button =
+document.getElementById(
+"dbtn-"+id
+);
+
+
+
+const check =
+document.getElementById(
+"dchk-"+id
+);
+
+
+
+if(index === -1){
+
+
+
+selectedDates.push(id);
+
+
+
+button.classList.add(
+"selected"
+);
+
+
+
+check.textContent =
+"✓ Disponible";
+
+
+
+}
+
+else{
+
+
+selectedDates.splice(
+index,
+1
+);
+
+
+
+button.classList.remove(
+"selected"
+);
+
+
+
+check.textContent =
+"";
+
+
+}
+
+
+
+}
+
+
+
+
+// ============================================================
+// RÉCAPITULATIF
+// ============================================================
+
+
+function buildRecap(){
+
+
+
+const prenom =
+document
+.getElementById(
+"inputPrenom"
+)
+.value
+.trim();
+
+
+
+const dates =
+selectedDates
+.map(id=>{
+
+
+const d =
+DATES_DATA.find(
+x=>x.id===id
+);
+
+
+return d ? d.label : id;
+
+
+})
+.join("<br>");
+
+
+
+
+document
+.getElementById(
+"voteRecap"
+)
+.innerHTML = `
+
+
+<div class="recap-row">
+
+👤
+
+<strong>
+Prénom :
+</strong>
+
+${prenom}
+
+</div>
+
+
+<div class="recap-row">
+
+🏔️
+
+<strong>
+Aventure :
+</strong>
+
+Bivouac Lac de Berseau
+
+</div>
+
+
+
+<div class="recap-row">
+
+📅
+
+<strong>
+Dates possibles :
+</strong>
+
+<br>
+
+${dates}
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+// ============================================================
+// ENVOI DU VOTE
+// ============================================================
+
+
+async function submitVote(){
+
+
+
+const prenom =
+document
+.getElementById(
+"inputPrenom"
+)
+.value
+.trim();
+
+
+
+const comment =
+document
+.getElementById(
+"inputComment"
+)
+?.value
+.trim()
+|| "";
+
+
+
+
+if(!prenom || selectedDates.length===0){
+
+
+alert(
+"Informations incomplètes."
+);
+
+
+return;
+
+
+}
+
+
+
+
+const button =
+document.querySelector(
+".btn-send"
+);
+
+
+
+button.disabled=true;
+
+button.textContent =
+"⏳ Enregistrement...";
+
+
+
+
+
+try{
+
+
+await saveVote({
+
+prenom:prenom,
+
+
+hikes:[
+"berseau"
+],
+
+
+dates:selectedDates,
+
+
+comment:comment
+
+
+
+});
+
+
+
+
+
+document
+.getElementById(
+"step3"
+)
+.classList.remove(
+"active"
+);
+
+
+
+document
+.getElementById(
+"stepSuccess"
+)
+.classList.add(
+"active"
+);
+
+
+
+
+document
+.getElementById(
+"progressFill"
+)
+.style.width =
+"100%";
+
+
+
+
+document
+.getElementById(
+"successMsg"
+)
+.textContent =
+
+`Merci ${prenom} ! 
+Ta disponibilité est enregistrée pour le bivouac du Lac de Berseau.`;
+
+
+
+}
+
+catch(error){
+
+
+console.error(error);
+
+
+alert(
+"Erreur lors de l'enregistrement."
+);
+
+
+button.disabled=false;
+
+
+button.textContent =
+"✅ Envoyer mon vote";
+
+
+
+}
+
+
+
+}
+
+
+
+
+// ============================================================
+// RESET
+// ============================================================
+
+
+function resetVote(){
+
+
+
+selectedDates=[];
+
+currentStep=1;
+
+
+
+
+document
+.getElementById(
+"inputPrenom"
+)
+.value="";
+
+
+
+if(document.getElementById("inputComment"))
+{
+
+document.getElementById(
+"inputComment"
+)
+.value="";
+
+}
+
+
+
+
+DATES_DATA.forEach(date=>{
+
+
+document
+.getElementById(
+"dbtn-"+date.id
+)
+?.classList.remove(
+"selected"
+);
+
+
+
+const check =
+document.getElementById(
+"dchk-"+date.id
+);
+
+
+
+if(check)
+check.textContent="";
+
+
+
+});
+
+
+
+
+document
+.getElementById(
+"stepSuccess"
+)
+.classList.remove(
+"active"
+);
+
+
+
+document
+.getElementById(
+"step1"
+)
+.classList.add(
+"active"
+);
+
+
+
+document
+.getElementById(
+"progressFill"
+)
+.style.width="0%";
+
+
+
+
+document
+.querySelectorAll(
+".pstep"
+)
+.forEach((el,i)=>{
+
+
+el.classList.remove(
+"active",
+"done"
+);
+
+
+
+if(i===0)
+el.classList.add(
+"active"
+);
+
+
+
+});
+
+
+
+}
+
+
+
+
+// ============================================================
+// CARTE LEAFLET
+// Lac d'Orédon → Lac d'Aumar → Lac de Berseau
+// ============================================================
+
+
+function initMap(){
+
+
+
+if(typeof L==="undefined")
+return;
+
+
+
+const element =
+document.getElementById(
+"map-berseau"
+);
+
+
+
+if(!element)
+return;
+
+
+
+
+const map =
+L.map(
+"map-berseau"
+)
+.setView(
+[
+42.835,
+0.15
+],
+13
+);
+
+
+
+
+
+L.tileLayer(
+"https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
+{
+
+attribution:
+"© OpenTopoMap",
+
+maxZoom:17
+
+}
+)
+.addTo(map);
+
+
+
+
+
+
+const route=[
+
+
+[42.819,0.184], // Orédon
+
+
+[42.831,0.176], // Aumar
+
+
+[42.842,0.161], // Aubert
+
+
+[42.850,0.145]  // Berseau
+
+
+];
+
+
+
+
+
+L.polyline(
+route,
+{
+
+color:"#245c3a",
+
+weight:5,
+
+opacity:0.85
+
+}
+)
+.addTo(map);
+
+
+
+
+
+
+const points=[
+
+
+
+{
+
+pos:[42.819,0.184],
+
+text:
+"Départ — Lac d'Orédon"
+
+},
+
+
+
+{
+
+pos:[42.831,0.176],
+
+text:
+"Passage — Lac d'Aumar"
+
+},
+
+
+
+{
+
+pos:[42.850,0.145],
+
+text:
+"Bivouac — Lac de Berseau"
+
+}
+
+
+];
+
+
+
+
+
+points.forEach(p=>{
+
+
+L.marker(
+p.pos
+)
+.addTo(map)
+.bindPopup(
+p.text
+);
+
+
+
+});
+
+
+
+
+map.fitBounds(
+route
+);
+
+
+
+}
+
+
+
+
+
+// ============================================================
+// INITIALISATION
+// ============================================================
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+buildCalendar();
+
+
+setTimeout(
+initMap,
+500
+);
+
+
+
+const input =
+document.getElementById(
+"inputPrenom"
+);
+
+
+
+if(input){
+
+
+input.addEventListener(
+"keydown",
+e=>{
+
+
+if(e.key==="Enter")
+goStep(2);
+
+
+}
+);
+
+
+
+}
+
+
+
 });
