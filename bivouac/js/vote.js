@@ -81,8 +81,8 @@ function toggleHike(id) {
 //  CALENDRIER DES DATES
 // ============================================================
 function buildCalendar() {
+  const gridAug = document.getElementById('datesGridAug');
   const gridSep = document.getElementById('datesGridSep');
-  const gridOct = document.getElementById('datesGridOct');
   if (!gridSep || !gridOct) return;
 
   DATES_DATA.forEach(d => {
@@ -95,8 +95,8 @@ function buildCalendar() {
       <div class="date-check" id="dchk-${d.id}"></div>
     `;
     btn.onclick = () => toggleDate(d.id);
-    if (d.month === 'sep') gridSep.appendChild(btn);
-    else gridOct.appendChild(btn);
+    if (d.month === "aout")gridAug.appendChild(btn);
+    else gridSep.appendChild(btn);
   });
 }
 
