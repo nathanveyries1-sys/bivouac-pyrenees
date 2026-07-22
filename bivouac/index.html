@@ -18,24 +18,24 @@
 <body>
 
 
-<header class="navbar">
+<header class="topnav">
 
-<a class="logo" href="index.html">
-🥾 Bivouac Pyrénées
+<a href="index.html" class="nav-logo">
+🏔️ Bivouac Pyrénées
 </a>
 
 
-<nav>
+<nav class="nav-menu">
 
-<a href="itineraire.html">
+<a href="itineraire.html" class="nav-link">
 Itinéraire
 </a>
 
-<a href="vote.html">
+<a href="vote.html" class="nav-link">
 Choisir la date
 </a>
 
-<a href="materiel.html">
+<a href="materiel.html" class="nav-link">
 Matériel
 </a>
 
@@ -45,42 +45,50 @@ Matériel
 
 
 
+
 <section class="hero">
 
 
 <div class="hero-content">
 
 
-<span class="badge">
-🏔 Aventure 2026
+<span class="hero-badge">
+🏕️ Aventure Pyrénées 2026
 </span>
 
 
-<h1>
+<h1 class="hero-title">
+
 Bivouac<br>
-<span>Lac de Berseau</span>
+Lac de Berseau
+
 </h1>
 
 
-<p>
+<p class="hero-sub">
 
-Une nuit au cœur des Pyrénées.
+Une nuit au cœur de la réserve du Néouvielle.
 <br>
-Une randonnée entre montagne, lac et ciel étoilé.
+Une aventure entre lacs d'altitude, montagne et ciel étoilé.
 
 </p>
+
 
 
 <div class="hero-buttons">
 
 
-<a href="vote.html" class="btn primary">
-Choisir la date
+<a href="vote.html" class="btn-primary">
+
+📅 Choisir la date
+
 </a>
 
 
-<a href="itineraire.html" class="btn secondary">
-Découvrir l'itinéraire
+<a href="itineraire.html" class="btn-secondary">
+
+🥾 Découvrir le parcours
+
 </a>
 
 
@@ -88,6 +96,15 @@ Découvrir l'itinéraire
 
 
 </div>
+
+
+
+<div class="hero-scroll">
+
+↓ Découvrir l'aventure
+
+</div>
+
 
 
 </section>
@@ -96,31 +113,35 @@ Découvrir l'itinéraire
 
 
 
-<section class="infos">
+<section class="section">
 
 
-<div class="section-title">
+<div class="container">
 
-<h2>
+
+<h2 class="section-title">
+
 L'aventure en quelques chiffres
+
 </h2>
 
-<p>
-Tout ce qu'il faut savoir avant le départ.
+
+<p class="section-description">
+
+Un week-end de randonnée pensé pour partager un moment unique entre amis.
+
 </p>
 
 
-</div>
+
+<div class="cards-grid">
 
 
 
-<div class="info-grid">
+<div class="card">
 
-
-<div class="info-card">
-
-<div>
-🏔
+<div class="card-icon">
+⛰️
 </div>
 
 <h3>
@@ -128,16 +149,17 @@ Altitude
 </h3>
 
 <p>
-2450 m
+2450 m au cœur des Pyrénées
 </p>
 
 </div>
 
 
 
-<div class="info-card">
 
-<div>
+<div class="card">
+
+<div class="card-icon">
 🥾
 </div>
 
@@ -146,7 +168,7 @@ Distance
 </h3>
 
 <p>
-12 km
+Environ 20 km sur deux jours
 </p>
 
 </div>
@@ -154,10 +176,11 @@ Distance
 
 
 
-<div class="info-card">
 
-<div>
-⛰
+<div class="card">
+
+<div class="card-icon">
+⬆️
 </div>
 
 <h3>
@@ -165,29 +188,34 @@ Dénivelé
 </h3>
 
 <p>
-850 m+
+850 m de montée
 </p>
 
 </div>
 
 
 
-<div class="info-card">
 
-<div>
-🌙
+
+<div class="card">
+
+<div class="card-icon">
+🌌
 </div>
 
 <h3>
-Nuit
+Bivouac
 </h3>
 
 <p>
-Bivouac lac
+Une nuit sous les étoiles
 </p>
 
 </div>
 
+
+
+</div>
 
 
 </div>
@@ -199,38 +227,73 @@ Bivouac lac
 
 
 
-<section class="story">
+<section class="section">
 
 
-<div class="story-image">
+<div class="container">
 
-<img src="images/lac-berseau.jpg">
+
+<div class="route-layout">
+
+
+<div class="route-image">
+
+<img src="images/lac-berseau.jpg" alt="Lac de Berseau">
 
 </div>
 
 
 
-<div class="story-text">
+<div class="route-info">
 
 
-<h2>
-Une aventure à partager
-</h2>
+<div class="info-box">
+
+<strong>
+Jour 1
+</strong>
+
+<span>
+Départ Lac d'Orédon → Lac d'Aumar → montée vers le bivouac
+</span>
+
+</div>
 
 
-<p>
-
-L'objectif est simple :
-partir ensemble découvrir un coin sauvage des Pyrénées,
-marcher jusqu'au lac, installer notre bivouac
-et profiter d'une soirée loin du quotidien.
-
-</p>
 
 
-<a href="itineraire.html" class="link">
+<div class="info-box">
 
-Voir le parcours →
+<strong>
+Nuit
+</strong>
+
+<span>
+Installation du campement au Lac de Berseau
+</span>
+
+</div>
+
+
+
+
+<div class="info-box">
+
+<strong>
+Jour 2
+</strong>
+
+<span>
+Lever du soleil puis retour vers le parking
+</span>
+
+</div>
+
+
+
+<a href="itineraire.html" class="btn-primary">
+
+Voir le parcours complet
 
 </a>
 
@@ -238,31 +301,58 @@ Voir le parcours →
 </div>
 
 
+
+</div>
+
+
+</div>
+
+
 </section>
 
 
 
 
 
+<section class="section">
 
-<section class="cta">
+
+<div class="container">
+
+
+<div class="card" style="text-align:center">
 
 
 <h2>
-Prêt pour l'aventure ?
+
+Une aventure organisée ensemble
+
 </h2>
 
 
 <p>
-Choisissez votre date idéale avec le groupe.
+
+Votez simplement pour votre week-end disponible.
+<br>
+Le site deviendra ensuite notre carnet de voyage.
+
 </p>
 
 
-<a href="vote.html" class="btn primary">
+<br>
 
-Voter maintenant
+
+<a href="vote.html" class="btn-primary">
+
+Participer au vote
 
 </a>
+
+
+</div>
+
+
+</div>
 
 
 </section>
@@ -270,7 +360,9 @@ Voter maintenant
 
 
 
-<footer>
+
+
+<footer class="footer">
 
 © 2026 Bivouac Pyrénées
 <br>
@@ -278,9 +370,6 @@ Créé pour notre aventure entre amis
 
 </footer>
 
-
-
-<script src="js/main.js"></script>
 
 
 </body>
