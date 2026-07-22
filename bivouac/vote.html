@@ -1,312 +1,390 @@
 <!DOCTYPE html>
 <html lang="fr">
+
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Voter — Bivouac Pyrénées 2026</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Choisir la date - Bivouac Pyrénées 2026</title>
+
+
+<link rel="stylesheet" href="css/style.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+
 </head>
+
+
+
+
 <body class="vote-page">
 
-  <nav class="topnav">
-    <a href="index.html" class="nav-logo">🏔️ Bivouac 2026</a>
-    <a href="admin.html" class="nav-link">📊 Résultats</a>
-  </nav>
 
-  <div class="vote-wrap">
 
-    <!-- PROGRESS BAR -->
-    <div class="progress-bar-wrap">
-      <div class="progress-steps">
-        <div class="pstep active" id="pstep1"><span>1</span> Qui es-tu ?</div>
-        <div class="pstep" id="pstep2"><span>2</span> Itinéraire</div>
-        <div class="pstep" id="pstep3"><span>3</span> Dates</div>
-        <div class="pstep" id="pstep4"><span>4</span> Commentaire</div>
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    </div>
 
-    <!-- ÉTAPE 1 : Prénom -->
-    <div class="vote-step active" id="step1">
-      <div class="step-card">
-        <h2 class="step-title">👋 Avant de commencer</h2>
-        <p class="step-sub">On a besoin de savoir qui vote !</p>
-        <div class="field-group">
-          <label>Ton prénom</label>
-          <input type="text" id="inputPrenom" placeholder="Ex : Thomas" maxlength="30" autocomplete="given-name">
-        </div>
-        <button class="btn-next" onclick="goStep(2)" id="btnStep1">Continuer →</button>
-      </div>
-    </div>
 
-    <!-- ÉTAPE 2 : Itinéraires -->
-    <div class="vote-step" id="step2">
-      <h2 class="step-title-big">Choisis ton itinéraire</h2>
-      <p class="step-sub-big">Sélectionne un ou plusieurs itinéraires. Tu peux voir les détails de chacun avant de choisir.</p>
+<header class="topnav">
 
-      <!-- ITINÉRAIRE 1 -->
-      <div class="hike-card" id="card-ayous">
-        <div class="hike-banner" style="background:linear-gradient(135deg,#2d5a3d,#4a7c5c)">
-          <div class="hike-banner-text">
-            <span class="hike-emoji">🏔️</span>
-            <div>
-              <div class="hike-banner-name">Lacs d'Ayous</div>
-              <div class="hike-banner-loc">Pyrénées-Atlantiques (64) · Lac Gentau — 2 000 m</div>
-            </div>
-          </div>
-          <div class="hike-select-btn" id="sel-ayous" onclick="toggleHike('ayous')">
-            <span class="sel-circle"></span> Choisir
-          </div>
-        </div>
 
-        <div class="hike-pills">
-          <span class="pill pill-amber">⭐⭐⭐ Intermédiaire</span>
-          <span class="pill pill-blue">📏 19 km</span>
-          <span class="pill pill-teal">⬆ 1 100 m D+</span>
-          <span class="pill pill-green">🏕 Bivouac autorisé</span>
-          <span class="pill pill-gray">💧 Eau au lac</span>
-          <span class="pill pill-gray">🚗 Parking Gabas</span>
-        </div>
+<a href="index.html" class="nav-logo">
 
-        <div class="hike-body-cols">
-          <div class="hike-desc-col">
-            <p class="hike-desc">Itinéraire <strong>iconique</strong> offrant une vue extraordinaire sur le Pic du Midi d'Ossau. Montée progressive depuis Gabas à travers la forêt, puis découverte du plateau lacustre avec les lacs d'Ayous. Le bivouac au bord du lac Gentau (2 000 m) est l'un des plus beaux des Pyrénées : lever de soleil avec le reflet du Pic du Midi dans l'eau au petit matin. Retour par un autre chemin pour varier les paysages.</p>
+🏔️ Bivouac Pyrénées
 
-            <div class="hike-stats-row">
-              <div class="hike-stat"><div class="hstat-val">19 km</div><div class="hstat-lbl">Distance</div></div>
-              <div class="hike-stat"><div class="hstat-val">1 100 m</div><div class="hstat-lbl">Dénivelé +</div></div>
-              <div class="hike-stat"><div class="hstat-val">2 jours</div><div class="hstat-lbl">Durée</div></div>
-              <div class="hike-stat"><div class="hstat-val">2 000 m</div><div class="hstat-lbl">Alt. bivouac</div></div>
-            </div>
+</a>
 
-            <details class="hike-more">
-              <summary>Voir le programme détaillé</summary>
-              <div class="hike-prog">
-                <div class="prog-day">
-                  <div class="prog-day-title">Jour 1 — Montée</div>
-                  <ul>
-                    <li>Départ parking de Gabas (1 050 m)</li>
-                    <li>Montée par le chemin des lacs d'Ayous</li>
-                    <li>Passage au refuge d'Ayous (1 982 m)</li>
-                    <li>Bivouac au lac Gentau (2 000 m)</li>
-                  </ul>
-                </div>
-                <div class="prog-day">
-                  <div class="prog-day-title">Jour 2 — Descente</div>
-                  <ul>
-                    <li>Lever de soleil sur le Pic du Midi d'Ossau</li>
-                    <li>Descente par la variante des lacs</li>
-                    <li>Retour parking de Gabas</li>
-                  </ul>
-                </div>
-              </div>
-            </details>
-          </div>
 
-          <div class="hike-map-col">
-            <div id="map-ayous" class="mini-map"></div>
-            <div class="map-legend">
-              <span class="legend-dot start"></span> Départ/Retour
-              <span class="legend-dot bivouac"></span> Bivouac
-            </div>
-          </div>
-        </div>
-      </div>
+<nav class="nav-menu">
 
-      <!-- ITINÉRAIRE 2 -->
-      <div class="hike-card" id="card-neouv">
-        <div class="hike-banner" style="background:linear-gradient(135deg,#1a3d5a,#2d6080)">
-          <div class="hike-banner-text">
-            <span class="hike-emoji">🌊</span>
-            <div>
-              <div class="hike-banner-name">Réserve du Néouvielle</div>
-              <div class="hike-banner-loc">Hautes-Pyrénées (65) · Lac d'Aubert — 2 150 m</div>
-            </div>
-          </div>
-          <div class="hike-select-btn" id="sel-neouv" onclick="toggleHike('neouv')">
-            <span class="sel-circle"></span> Choisir
-          </div>
-        </div>
 
-        <div class="hike-pills">
-          <span class="pill pill-green">⭐⭐ Facile</span>
-          <span class="pill pill-blue">📏 16 km</span>
-          <span class="pill pill-teal">⬆ 750 m D+</span>
-          <span class="pill pill-green">🏕 Aire officielle</span>
-          <span class="pill pill-gray">💧 70+ lacs</span>
-        </div>
+<a href="itineraire.html" class="nav-link">
 
-        <div class="hike-body-cols">
-          <div class="hike-desc-col">
-            <p class="hike-desc">La <strong>réserve naturelle du Néouvielle</strong> est un véritable paradis pour les amoureux des lacs : plus de 70 lacs d'altitude disséminés dans un paysage de granite et de pins à crochets. Dénivelé modéré, idéal pour un <strong>premier bivouac</strong>. L'aire de bivouac officielle au lac d'Aubert est balisée et autorisée de 19h à 9h. Paysages irréels, faune préservée (marmottes, isards).</p>
+Itinéraire
 
-            <div class="hike-stats-row">
-              <div class="hike-stat"><div class="hstat-val">16 km</div><div class="hstat-lbl">Distance</div></div>
-              <div class="hike-stat"><div class="hstat-val">750 m</div><div class="hstat-lbl">Dénivelé +</div></div>
-              <div class="hike-stat"><div class="hstat-val">2 jours</div><div class="hstat-lbl">Durée</div></div>
-              <div class="hike-stat"><div class="hstat-val">2 150 m</div><div class="hstat-lbl">Alt. bivouac</div></div>
-            </div>
+</a>
 
-            <details class="hike-more">
-              <summary>Voir le programme détaillé</summary>
-              <div class="hike-prog">
-                <div class="prog-day">
-                  <div class="prog-day-title">Jour 1 — Découverte</div>
-                  <ul>
-                    <li>Départ parking lac d'Orédon (1 849 m)</li>
-                    <li>Tour des lacs : Aumar, Aubert, Tourrat</li>
-                    <li>Bivouac sur aire officielle lac d'Aubert</li>
-                  </ul>
-                </div>
-                <div class="prog-day">
-                  <div class="prog-day-title">Jour 2 — Retour</div>
-                  <ul>
-                    <li>Balade matinale autour des lacs</li>
-                    <li>Descente vers le lac d'Orédon</li>
-                    <li>Retour parking</li>
-                  </ul>
-                </div>
-              </div>
-            </details>
-          </div>
 
-          <div class="hike-map-col">
-            <div id="map-neouv" class="mini-map"></div>
-            <div class="map-legend">
-              <span class="legend-dot start"></span> Départ/Retour
-              <span class="legend-dot bivouac"></span> Bivouac
-            </div>
-          </div>
-        </div>
-      </div>
+<a href="materiel.html" class="nav-link">
 
-      <!-- ITINÉRAIRE 3 -->
-      <div class="hike-card" id="card-oo">
-        <div class="hike-banner" style="background:linear-gradient(135deg,#3d2a4a,#6b4a7a)">
-          <div class="hike-banner-text">
-            <span class="hike-emoji">💧</span>
-            <div>
-              <div class="hike-banner-name">Lac d'Oô & Cirque de Cézy</div>
-              <div class="hike-banner-loc">Haute-Garonne (31) · Lac d'Oô — 1 504 m</div>
-            </div>
-          </div>
-          <div class="hike-select-btn" id="sel-oo" onclick="toggleHike('oo')">
-            <span class="sel-circle"></span> Choisir
-          </div>
-        </div>
+Matériel
 
-        <div class="hike-pills">
-          <span class="pill pill-red">⭐⭐⭐⭐ Difficile</span>
-          <span class="pill pill-blue">📏 22 km</span>
-          <span class="pill pill-teal">⬆ 1 400 m D+</span>
-          <span class="pill pill-green">🏕 Bivouac autorisé</span>
-          <span class="pill pill-gray">💧 Cascade 273 m</span>
-          <span class="pill pill-gray">🚗 Parking Granges d'Astau</span>
-        </div>
+</a>
 
-        <div class="hike-body-cols">
-          <div class="hike-desc-col">
-            <p class="hike-desc">L'itinéraire des <strong>aventuriers</strong>. La montée au lac d'Oô est spectaculaire avec sa cascade de 273 m qui se déverse dans le lac. Au-delà, la progression vers le cirque de Cézy (2 500 m) offre des vues grandioses sur les sommets enneigés. Bivouac face à la grande cascade. Dénivelé important, <strong>réservé aux marcheurs expérimentés</strong>.</p>
 
-            <div class="hike-stats-row">
-              <div class="hike-stat"><div class="hstat-val">22 km</div><div class="hstat-lbl">Distance</div></div>
-              <div class="hike-stat"><div class="hstat-val">1 400 m</div><div class="hstat-lbl">Dénivelé +</div></div>
-              <div class="hike-stat"><div class="hstat-val">2 jours</div><div class="hstat-lbl">Durée</div></div>
-              <div class="hike-stat"><div class="hstat-val">1 504 m</div><div class="hstat-lbl">Alt. bivouac</div></div>
-            </div>
+</nav>
 
-            <details class="hike-more">
-              <summary>Voir le programme détaillé</summary>
-              <div class="hike-prog">
-                <div class="prog-day">
-                  <div class="prog-day-title">Jour 1 — Montée</div>
-                  <ul>
-                    <li>Départ Granges d'Astau (1 139 m)</li>
-                    <li>Montée au lac d'Oô avec vue sur la cascade</li>
-                    <li>Progression vers le cirque de Cézy</li>
-                    <li>Bivouac au bord du lac d'Oô</li>
-                  </ul>
-                </div>
-                <div class="prog-day">
-                  <div class="prog-day-title">Jour 2 — Descente</div>
-                  <ul>
-                    <li>Lever de soleil sur la cascade</li>
-                    <li>Descente par le même sentier</li>
-                    <li>Retour parking Granges d'Astau</li>
-                  </ul>
-                </div>
-              </div>
-            </details>
-          </div>
 
-          <div class="hike-map-col">
-            <div id="map-oo" class="mini-map"></div>
-            <div class="map-legend">
-              <span class="legend-dot start"></span> Départ/Retour
-              <span class="legend-dot bivouac"></span> Bivouac
-            </div>
-          </div>
-        </div>
-      </div>
+</header>
 
-      <div class="step-nav">
-        <button class="btn-back" onclick="goStep(1)">← Retour</button>
-        <button class="btn-next" onclick="goStep(3)">Continuer →</button>
-      </div>
-    </div>
 
-    <!-- ÉTAPE 3 : Dates -->
-    <div class="vote-step" id="step3">
-      <h2 class="step-title-big">Tes disponibilités</h2>
-      <p class="step-sub-big">Coche tous les week-ends où tu es disponible. Le départ se fait le samedi matin, retour le dimanche soir.</p>
 
-      <div class="calendar-wrap">
-        <div class="cal-month-title">Août 2026</div>
-        <div class="dates-grid" id="datesGridAug"></div>
-        <div class="cal-month-title" style="margin-top:1.5rem">Septembre 2026</div>
-        <div class="dates-grid" id="datesGridSep"></div>
-      </div>
 
-      <div class="step-nav">
-        <button class="btn-back" onclick="goStep(2)">← Retour</button>
-        <button class="btn-next" onclick="goStep(4)">Continuer →</button>
-      </div>
-    </div>
 
-    <!-- ÉTAPE 4 : Commentaire + envoi -->
-    <div class="vote-step" id="step4">
-      <div class="step-card">
-        <h2 class="step-title">✏️ Un commentaire ?</h2>
-        <p class="step-sub">Facultatif — Remarques, préférences, contraintes…</p>
-        <div class="field-group">
-          <textarea id="inputComment" rows="4" placeholder="Ex : Je préfère un itinéraire pas trop difficile. Je ne peux pas le week-end du 20 sept finalement..."></textarea>
-        </div>
 
-        <div class="vote-recap" id="voteRecap"></div>
 
-        <button class="btn-send" onclick="submitVote()">✅ Envoyer mon vote</button>
-        <button class="btn-back" onclick="goStep(3)" style="margin-top:0.75rem;width:100%">← Retour</button>
-      </div>
-    </div>
+<div class="vote-wrap">
 
-    <!-- SUCCÈS -->
-    <div class="vote-step" id="stepSuccess">
-      <div class="step-card success-card">
-        <div class="success-icon">🎉</div>
-        <h2>Vote enregistré !</h2>
-        <p id="successMsg"></p>
-        <a href="index.html" class="btn-primary" style="margin-top:1.5rem;display:inline-block">← Retour à l'accueil</a>
-        <button onclick="resetVote()" class="btn-back" style="margin-top:0.75rem;width:100%">Voter pour quelqu'un d'autre</button>
-      </div>
-    </div>
 
-  </div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/firebase-config.js"></script>
-  <script src="js/vote.js"></script>
+
+
+
+
+<div class="step-card">
+
+
+<h1 class="step-title">
+
+🏕️ Bivouac Lac de Berseau
+
+</h1>
+
+
+
+<p class="step-sub">
+
+Une seule destination, plusieurs possibilités de dates.
+Choisis les week-ends où tu es disponible.
+
+</p>
+
+
+
+
+
+<div class="card">
+
+
+<h3>
+
+🥾 Parcours prévu
+
+</h3>
+
+
+<p>
+
+
+<b>Jour 1 :</b>
+
+<br>
+
+Départ du Lac d'Orédon → Lac d'Aumar → montée vers le bivouac
+
+
+<br><br>
+
+
+<b>Nuit :</b>
+
+<br>
+
+Installation du campement au Lac de Berseau,
+repas collectif et coucher de soleil
+
+
+<br><br>
+
+
+<b>Jour 2 :</b>
+
+<br>
+
+Réveil en montagne puis retour vers le Lac d'Orédon
+
+
+</p>
+
+
+
+</div>
+
+
+
+
+<br>
+
+
+
+
+
+<div class="field-group">
+
+
+<label>
+
+Ton prénom
+
+</label>
+
+
+<input 
+type="text"
+id="inputPrenom"
+placeholder="Ex : Nathan"
+maxlength="30"
+>
+
+
+</div>
+
+
+
+
+
+
+
+<h2 class="step-title">
+
+📅 Tes disponibilités
+
+</h2>
+
+
+<p class="step-sub">
+
+Sélectionne tous les week-ends possibles.
+
+</p>
+
+
+
+
+
+
+<div class="calendar-wrap">
+
+
+<h3>
+
+Août 2026
+
+</h3>
+
+
+<div class="dates-grid" id="datesGridAug">
+
+</div>
+
+
+
+
+
+<h3 style="margin-top:30px">
+
+Septembre 2026
+
+</h3>
+
+
+<div class="dates-grid" id="datesGridSep">
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<br>
+
+
+
+
+
+<div class="field-group">
+
+
+<label>
+
+Une remarque ?
+
+</label>
+
+
+
+<textarea
+
+id="inputComment"
+
+rows="4"
+
+placeholder="Ex : préférence de date, contrainte particulière..."
+
+></textarea>
+
+
+</div>
+
+
+
+
+
+
+<div class="vote-recap" id="voteRecap">
+
+
+</div>
+
+
+
+
+
+
+<button 
+
+class="btn-send"
+
+onclick="submitVote()"
+
+>
+
+✅ Envoyer mon choix
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+<div class="step-card" id="stepSuccess" style="display:none;text-align:center;margin-top:30px">
+
+
+<div class="card-icon">
+
+🎉
+
+</div>
+
+
+<h2>
+
+Merci pour ton vote !
+
+</h2>
+
+
+<p id="successMsg">
+
+Ton choix a bien été enregistré.
+
+</p>
+
+
+<br>
+
+
+<a href="index.html" class="btn-primary">
+
+Retour accueil
+
+</a>
+
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+© 2026 Bivouac Pyrénées
+
+<br>
+
+Choix de la date du bivouac Lac de Berseau
+
+
+</footer>
+
+
+
+
+
+
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+
+
+<script src="js/firebase-config.js"></script>
+
+<script src="js/vote.js"></script>
+
+
+
 </body>
+
+
 </html>
