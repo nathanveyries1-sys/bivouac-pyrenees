@@ -1,375 +1,288 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bivouac Néouvielle 2025 🏔️</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Bivouac Pyrénées - Lac de Berseau</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
 </head>
+
+
 <body>
 
-<!-- ═══ NAV ═══ -->
-<nav class="topnav">
-  <span class="nav-logo">⛺ Bivouac Néouvielle 2025</span>
-  <div class="nav-links">
-    <a href="#rando">La rando</a>
-    <a href="#vote" class="nav-cta">🗳️ Voter</a>
-  </div>
+
+<header class="navbar">
+
+<a class="logo" href="index.html">
+🥾 Bivouac Pyrénées
+</a>
+
+
+<nav>
+
+<a href="itineraire.html">
+Itinéraire
+</a>
+
+<a href="vote.html">
+Choisir la date
+</a>
+
+<a href="materiel.html">
+Matériel
+</a>
+
 </nav>
 
-<!-- ═══ HERO ═══ -->
+</header>
+
+
+
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <div class="hero-badge">🏔️ Hautes-Pyrénées · Été 2025</div>
-    <h1>Bivouac au lac de Berseau</h1>
-    <p class="hero-sub">2 jours dans la Réserve du Néouvielle. On monte, on s'installe au bord du lac, on dort sous les étoiles, on redescend.</p>
-    <div class="hero-btns">
-      <a href="#rando" class="btn-outline">↓ Voir la rando</a>
-      <a href="#vote" class="btn-solid">🗳️ Indiquer mes dispo</a>
-    </div>
-  </div>
-  <div class="hero-cards">
-    <div class="hcard"><div class="hcard-val">16 km</div><div class="hcard-lbl">Distance totale</div></div>
-    <div class="hcard"><div class="hcard-val">+750 m</div><div class="hcard-lbl">Dénivelé</div></div>
-    <div class="hcard"><div class="hcard-val">2 jours</div><div class="hcard-lbl">Durée</div></div>
-    <div class="hcard"><div class="hcard-val">2 200 m</div><div class="hcard-lbl">Alt. bivouac</div></div>
-  </div>
+
+
+<div class="hero-content">
+
+
+<span class="badge">
+🏔 Aventure 2026
+</span>
+
+
+<h1>
+Bivouac<br>
+<span>Lac de Berseau</span>
+</h1>
+
+
+<p>
+
+Une nuit au cœur des Pyrénées.
+<br>
+Une randonnée entre montagne, lac et ciel étoilé.
+
+</p>
+
+
+<div class="hero-buttons">
+
+
+<a href="vote.html" class="btn primary">
+Choisir la date
+</a>
+
+
+<a href="itineraire.html" class="btn secondary">
+Découvrir l'itinéraire
+</a>
+
+
+</div>
+
+
+</div>
+
+
 </section>
 
-<!-- ═══ LA RANDO ═══ -->
-<section class="section" id="rando">
-  <div class="container">
 
-    <div class="section-header">
-      <h2>La randonnée</h2>
-      <p>Réserve Naturelle du Néouvielle — Hautes-Pyrénées (65)</p>
-    </div>
 
-    <!-- CARTE -->
-    <div class="map-block">
-      <div id="mainMap"></div>
-      <div class="map-legend-row">
-        <span><span class="dot green"></span> Départ / Retour — Parking d'Orédon</span>
-        <span><span class="dot orange"></span> Bivouac — Lac de Berseau</span>
-        <span><span class="dot blue"></span> Lacs traversés</span>
-      </div>
-    </div>
 
-    <!-- PROGRAMME -->
-    <div class="prog-grid">
-      <div class="prog-card day1">
-        <div class="prog-day-badge">Jour 1</div>
-        <h3>Montée & installation</h3>
-        <div class="prog-steps">
-          <div class="prog-step">
-            <div class="prog-dot start"></div>
-            <div>
-              <strong>Parking d'Orédon</strong> — 1 849 m
-              <p>Départ le matin, tout le groupe ensemble</p>
-            </div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-dot lake"></div>
-            <div>
-              <strong>Lac d'Aumar</strong> — 2 192 m
-              <p>~1h · Premier grand lac · Pause vue panoramique</p>
-            </div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-dot lake"></div>
-            <div>
-              <strong>Lac d'Aubert</strong> — 2 151 m
-              <p>~30 min · Aire de bivouac officielle visible</p>
-            </div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-dot bivouac"></div>
-            <div>
-              <strong>Lac de Berseau</strong> — ~2 200 m
-              <p>~1h30 · Installation des tentes · Baignade possible · Coucher de soleil 🌅</p>
-            </div>
-          </div>
-        </div>
-        <div class="prog-info"><span>📏 ~8 km</span><span>⬆ +750 m</span><span>🕒 4–5h</span></div>
-      </div>
 
-      <div class="prog-card day2">
-        <div class="prog-day-badge">Jour 2</div>
-        <h3>Retour panoramique</h3>
-        <div class="prog-steps">
-          <div class="prog-step">
-            <div class="prog-dot bivouac"></div>
-            <div>
-              <strong>Lac de Berseau</strong>
-              <p>Réveil tôt · Lever de soleil sur les sommets · Démontage</p>
-            </div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-dot lake"></div>
-            <div>
-              <strong>Col d'Estoudou</strong> — 2 260 m
-              <p>~1h30 · Panorama 360° sur toute la chaîne</p>
-            </div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-dot lake"></div>
-            <div>
-              <strong>Tour des lacs</strong>
-              <p>Lacs de Tourrat, de l'Oule · Paysage lunaire de granite</p>
-            </div>
-          </div>
-          <div class="prog-step">
-            <div class="prog-dot start"></div>
-            <div>
-              <strong>Retour parking d'Orédon</strong>
-              <p>~2h · Fin d'après-midi · Retour aux voitures</p>
-            </div>
-          </div>
-        </div>
-        <div class="prog-info"><span>📏 ~8 km</span><span>⬇ -750 m</span><span>🕒 5–6h</span></div>
-      </div>
-    </div>
+<section class="infos">
 
-    <!-- INFOS PRATIQUES -->
-    <div class="info-grid">
-      <div class="info-card">
-        <div class="info-icon">⭐</div>
-        <h4>Difficulté</h4>
-        <p>Intermédiaire. Pas besoin d'être expert, mais il faut être à l'aise avec un sac lourd sur plusieurs heures.</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🏕️</div>
-        <h4>Bivouac</h4>
-        <p>Autorisé de 19h à 9h dans la réserve, à plus d'1h de marche d'un accès motorisé. On est dans les règles.</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">💧</div>
-        <h4>Eau</h4>
-        <p>Nombreux lacs et torrents. Prévoir une gourde filtrante ou des pastilles de purification.</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🚗</div>
-        <h4>Accès</h4>
-        <p>Parking du lac d'Orédon (1 849 m). Route d'accès payante en saison depuis Aragnouet (navette possible).</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🦅</div>
-        <h4>Faune</h4>
-        <p>Marmottes, isards, vautours fauves. Réserve naturelle protégée — respecter la faune et la flore.</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">🌡️</div>
-        <h4>Température</h4>
-        <p>Nuit à 2 200 m : peut descendre à 5–10°C en été. Prévoir duvet chaud et vêtements supplémentaires.</p>
-      </div>
-    </div>
 
-  </div>
+<div class="section-title">
+
+<h2>
+L'aventure en quelques chiffres
+</h2>
+
+<p>
+Tout ce qu'il faut savoir avant le départ.
+</p>
+
+
+</div>
+
+
+
+<div class="info-grid">
+
+
+<div class="info-card">
+
+<div>
+🏔
+</div>
+
+<h3>
+Altitude
+</h3>
+
+<p>
+2450 m
+</p>
+
+</div>
+
+
+
+<div class="info-card">
+
+<div>
+🥾
+</div>
+
+<h3>
+Distance
+</h3>
+
+<p>
+12 km
+</p>
+
+</div>
+
+
+
+
+<div class="info-card">
+
+<div>
+⛰
+</div>
+
+<h3>
+Dénivelé
+</h3>
+
+<p>
+850 m+
+</p>
+
+</div>
+
+
+
+<div class="info-card">
+
+<div>
+🌙
+</div>
+
+<h3>
+Nuit
+</h3>
+
+<p>
+Bivouac lac
+</p>
+
+</div>
+
+
+
+</div>
+
+
 </section>
 
-<!-- ═══ PHOTOS / GALERIE TEXTE ═══ -->
-<section class="section section-dark" id="photos">
-  <div class="container">
-    <div class="section-header light">
-      <h2>Ce qui vous attend</h2>
-      <p>Quelques aperçus du secteur</p>
-    </div>
-    <div class="photo-grid">
-      <div class="photo-card" style="background:linear-gradient(160deg,#1a4a2a,#2d6040)">
-        <div class="photo-icon">🌊</div>
-        <h4>Les lacs d'altitude</h4>
-        <p>Plus de 70 lacs cristallins dans la réserve. L'eau est d'un bleu irréel.</p>
-      </div>
-      <div class="photo-card" style="background:linear-gradient(160deg,#1a2a4a,#2d4060)">
-        <div class="photo-icon">🌌</div>
-        <h4>Nuit étoilée</h4>
-        <p>Loin de toute pollution lumineuse, la voie lactée est visible à l'œil nu.</p>
-      </div>
-      <div class="photo-card" style="background:linear-gradient(160deg,#3a2a1a,#6a4a2a)">
-        <div class="photo-icon">🌅</div>
-        <h4>Lever de soleil</h4>
-        <p>Le reflet des sommets dans les lacs au petit matin. Un moment inoubliable.</p>
-      </div>
-      <div class="photo-card" style="background:linear-gradient(160deg,#2a3a1a,#4a6030)">
-        <div class="photo-icon">🦫</div>
-        <h4>Faune sauvage</h4>
-        <p>Marmottes curieuses, isards sur les crêtes, vautours planant dans les courants.</p>
-      </div>
-    </div>
-  </div>
+
+
+
+
+<section class="story">
+
+
+<div class="story-image">
+
+<img src="images/lac-berseau.jpg">
+
+</div>
+
+
+
+<div class="story-text">
+
+
+<h2>
+Une aventure à partager
+</h2>
+
+
+<p>
+
+L'objectif est simple :
+partir ensemble découvrir un coin sauvage des Pyrénées,
+marcher jusqu'au lac, installer notre bivouac
+et profiter d'une soirée loin du quotidien.
+
+</p>
+
+
+<a href="itineraire.html" class="link">
+
+Voir le parcours →
+
+</a>
+
+
+</div>
+
+
 </section>
 
-<!-- ═══ VOTE DATES ═══ -->
-<section class="section" id="vote">
-  <div class="container narrow">
 
-    <div class="section-header">
-      <h2>🗳️ Tes disponibilités</h2>
-      <p>Coche tous les week-ends où tu es libre. On choisira la date qui convient au plus grand nombre.</p>
-    </div>
 
-    <!-- ÉTAPE 1 : Prénom -->
-    <div class="vote-card" id="voteCardPrenom">
-      <div class="vote-step-label">Étape 1 sur 2</div>
-      <h3>Qui es-tu ?</h3>
-      <input type="text" id="inputPrenom" placeholder="Ton prénom" maxlength="30">
-      <button class="btn-solid full" onclick="showDates()">Continuer →</button>
-    </div>
 
-    <!-- ÉTAPE 2 : Dates -->
-    <div class="vote-card hidden" id="voteCardDates">
-      <div class="vote-step-label">Étape 2 sur 2</div>
-      <h3>Tes week-ends disponibles</h3>
-      <p class="vote-hint">Sélectionne tous les week-ends où tu es libre (plusieurs choix possibles)</p>
 
-      <div class="month-label">Septembre 2025</div>
-      <div class="dates-grid" id="gridSep"></div>
 
-      <div class="month-label">Octobre 2025</div>
-      <div class="dates-grid" id="gridOct"></div>
+<section class="cta">
 
-      <div class="vote-none-row">
-        <label class="none-check">
-          <input type="checkbox" id="checkNone" onchange="toggleNone()"> Aucune de ces dates ne me convient
-        </label>
-      </div>
 
-      <div class="vote-recap hidden" id="voteRecap"></div>
+<h2>
+Prêt pour l'aventure ?
+</h2>
 
-      <button class="btn-solid full" onclick="submitVote()">✅ Envoyer mes disponibilités</button>
-      <button class="btn-ghost-sm" onclick="backToPrenom()">← Modifier mon prénom</button>
-    </div>
 
-    <!-- SUCCÈS -->
-    <div class="vote-card hidden success-card" id="voteCardSuccess">
-      <div class="success-icon">🎉</div>
-      <h3 id="successTitle">Merci !</h3>
-      <p id="successMsg"></p>
-      <a href="admin.html" class="btn-solid full" style="margin-top:1.25rem">📊 Voir les résultats</a>
-      <button class="btn-ghost-sm" onclick="resetVote()">Voter pour quelqu'un d'autre</button>
-    </div>
+<p>
+Choisissez votre date idéale avec le groupe.
+</p>
 
-  </div>
+
+<a href="vote.html" class="btn primary">
+
+Voter maintenant
+
+</a>
+
+
 </section>
 
-<!-- ═══ LISTE DE MATÉRIEL ═══ -->
-<section class="section section-gear" id="materiel">
-  <div class="container">
-    <div class="section-header">
-      <h2>🎒 Ce qu'il faut emporter</h2>
-      <p>Liste par personne — à préparer la veille du départ</p>
-    </div>
 
-    <div class="gear-grid">
 
-      <div class="gear-col">
-        <div class="gear-title">💧 Eau & hydratation</div>
-        <ul class="gear-list">
-          <li class="important">2 à 3 litres d'eau minimum au départ</li>
-          <li class="important">Gourde filtrante (type Sawyer ou LifeStraw)</li>
-          <li>Pastilles de purification (en secours)</li>
-          <li>Thermos pour le café/thé du matin</li>
-        </ul>
-      </div>
 
-      <div class="gear-col">
-        <div class="gear-title">⛺ Couchage & abri</div>
-        <ul class="gear-list">
-          <li class="important">Tente légère (1 ou 2 personnes)</li>
-          <li class="important">Sac de couchage 0°C / confort 5°C minimum</li>
-          <li class="important">Matelas isolant (indispensable, sol froid)</li>
-          <li>Oreiller gonflable (optionnel mais confort ++)</li>
-        </ul>
-      </div>
+<footer>
 
-      <div class="gear-col">
-        <div class="gear-title">🥾 Vêtements</div>
-        <ul class="gear-list">
-          <li class="important">Chaussures de randonnée (chevilles hautes)</li>
-          <li class="important">Veste imperméable + coupe-vent</li>
-          <li class="important">Couche intermédiaire polaire</li>
-          <li>Bonnet + gants légers (nuit à 2 200 m)</li>
-          <li>Guêtres si météo incertaine</li>
-          <li>Bas de rechange (pieds = priorité)</li>
-          <li>Lunettes de soleil + crème solaire indice 50</li>
-        </ul>
-      </div>
+© 2026 Bivouac Pyrénées
+<br>
+Créé pour notre aventure entre amis
 
-      <div class="gear-col">
-        <div class="gear-title">🍳 Repas & cuisine</div>
-        <ul class="gear-list">
-          <li class="important">Réchaud à gaz + cartouche</li>
-          <li class="important">Repas J1 soir : lyophilisé ou pâtes/riz</li>
-          <li class="important">Petit-déjeuner J2 : flocons d'avoine, fruits secs, café</li>
-          <li>Repas J1 midi : sandwich, barre de céréales</li>
-          <li>Snacks pour la marche : fruits secs, noix, chocolat</li>
-          <li>Couverts légers + gamelle</li>
-          <li>Allume-feu</li>
-        </ul>
-      </div>
-
-      <div class="gear-col">
-        <div class="gear-title">🩺 Sécurité & santé</div>
-        <ul class="gear-list">
-          <li class="important">Trousse de secours (pansements, désinfectant, anti-douleur)</li>
-          <li class="important">Lampe frontale + piles de rechange</li>
-          <li>Couverture de survie</li>
-          <li>Sifflet</li>
-          <li>Carte IGN du secteur (ou appli hors ligne)</li>
-          <li>Téléphone chargé à 100%</li>
-          <li>Batterie externe</li>
-        </ul>
-      </div>
-
-      <div class="gear-col">
-        <div class="gear-title">♻️ Respect de la nature</div>
-        <ul class="gear-list">
-          <li class="important">Sacs poubelle — on repart avec tout</li>
-          <li class="important">Papier toilette biodégradable + truelle</li>
-          <li>Savon biodégradable</li>
-          <li>Ne pas faire de feu (interdit dans la réserve)</li>
-          <li>Rester sur les sentiers balisés</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="gear-note">
-      <span>💡</span>
-      <p>Objectif : sac entre <strong>10 et 14 kg</strong> avec eau et nourriture. Au-delà ça devient pénible sur 2 jours. Faites du tri !</p>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ RÈGLES BIVOUAC ═══ -->
-<section class="section section-dark">
-  <div class="container">
-    <div class="section-header light">
-      <h2>📋 Règles du bivouac</h2>
-      <p>Réserve naturelle — on respecte les règles</p>
-    </div>
-    <div class="rules-row">
-      <div class="rule"><span>🕖</span><div><strong>Horaires</strong><p>Tente montée après 19h, démontée avant 9h</p></div></div>
-      <div class="rule"><span>🚗</span><div><strong>Distance</strong><p>À plus d'1h de marche de tout accès motorisé</p></div></div>
-      <div class="rule"><span>🔥</span><div><strong>Feu interdit</strong><p>Aucun feu de camp dans la réserve naturelle</p></div></div>
-      <div class="rule"><span>🌿</span><div><strong>Leave No Trace</strong><p>On repart avec tous nos déchets, sans exception</p></div></div>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  <p>Bivouac Néouvielle 2025 — <a href="admin.html">Voir les résultats</a></p>
 </footer>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<script src="js/vote.js"></script>
-<script src="js/map.js"></script>
+
+
+<script src="js/main.js"></script>
+
+
 </body>
+
 </html>
