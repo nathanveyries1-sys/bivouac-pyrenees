@@ -1,1 +1,530 @@
-ergegr
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Itinéraire - Lac de Berseau | Bivouac Pyrénées</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<header class="topnav">
+
+
+<a href="index.html" class="nav-logo">
+
+🏔️ Bivouac Pyrénées
+
+</a>
+
+
+
+<nav class="nav-menu">
+
+
+<a href="itineraire.html" class="nav-link">
+Itinéraire
+</a>
+
+
+<a href="vote.html" class="nav-link">
+Choisir la date
+</a>
+
+
+<a href="materiel.html" class="nav-link">
+Matériel
+</a>
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+<section class="section" style="padding-top:130px">
+
+
+<div class="container">
+
+
+<h1 class="section-title">
+
+🥾 Notre parcours
+
+</h1>
+
+
+<p class="section-description">
+
+Deux jours d'aventure dans la réserve du Néouvielle,
+entre lacs d'altitude et paysages pyrénéens.
+
+</p>
+
+
+
+
+
+<div class="route-layout">
+
+
+
+<div>
+
+
+<div class="card">
+
+
+<h3>
+📍 Départ
+</h3>
+
+
+<p>
+
+Parking du Lac d'Orédon  
+<br>
+Altitude : 1 849 m
+
+</p>
+
+
+</div>
+
+<br>
+
+
+
+<div class="card">
+
+
+<h3>
+🌊 Étape 1
+</h3>
+
+
+<p>
+
+Montée progressive vers le Lac d'Aumar.
+<br><br>
+
+Un des plus beaux lacs des Pyrénées,
+entouré de pins à crochets et de sommets granitiques.
+
+</p>
+
+
+</div>
+
+
+<br>
+
+
+
+
+<div class="card">
+
+
+<h3>
+🏕️ Nuit au Lac de Berseau
+</h3>
+
+
+<p>
+
+Installation du bivouac en altitude.
+<br><br>
+
+Moment fort de l'aventure :
+repas ensemble, coucher du soleil et ciel étoilé.
+
+</p>
+
+
+</div>
+
+
+<br>
+
+
+
+
+<div class="card">
+
+
+<h3>
+🌅 Retour
+</h3>
+
+
+<p>
+
+Réveil face aux montagnes puis descente progressive
+vers le Lac d'Orédon.
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+<div class="route-image">
+
+
+<img src="images/lac-berseau.jpg" 
+alt="Lac de Berseau">
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="section">
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+🗺️ Carte du parcours
+
+</h2>
+
+
+<div id="map-berseau" 
+style="
+height:450px;
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+">
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="section">
+
+
+<div class="container">
+
+
+<h2 class="section-title">
+
+📋 Informations pratiques
+
+</h2>
+
+
+
+
+<div class="cards-grid">
+
+
+
+<div class="card">
+
+<div class="card-icon">
+🥾
+</div>
+
+
+<h3>
+Distance
+</h3>
+
+
+<p>
+≈ 20 km aller-retour
+</p>
+
+
+</div>
+
+
+
+
+<div class="card">
+
+<div class="card-icon">
+⬆️
+</div>
+
+
+<h3>
+Dénivelé
+</h3>
+
+
+<p>
+≈ 850 m positif
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<div class="card-icon">
+⏱️
+</div>
+
+
+<h3>
+Durée
+</h3>
+
+
+<p>
+2 jours / 1 nuit
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<div class="card-icon">
+🌡️
+</div>
+
+
+<h3>
+Altitude
+</h3>
+
+
+<p>
+Environ 2450 m
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<section class="section">
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>
+Programme prévu
+</h2>
+
+
+<br>
+
+
+<p>
+
+<b>Samedi matin :</b><br>
+Départ du Lac d'Orédon et montée vers les lacs d'altitude.
+
+<br><br>
+
+
+<b>Samedi après-midi :</b><br>
+Installation du bivouac au Lac de Berseau.
+
+<br><br>
+
+
+<b>Samedi soir :</b><br>
+Repas collectif, coucher de soleil et observation du ciel.
+
+<br><br>
+
+
+<b>Dimanche matin :</b><br>
+Petit déjeuner, rangement du camp et retour.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+© 2026 Bivouac Pyrénées
+
+<br>
+
+Lac de Berseau - Réserve du Néouvielle
+
+
+</footer>
+
+
+
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+
+<script>
+
+
+const map = L.map('map-berseau')
+.setView([42.82,0.18],13);
+
+
+
+L.tileLayer(
+'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',
+{
+attribution:'© OpenTopoMap'
+}
+).addTo(map);
+
+
+
+
+const parcours = [
+
+[42.821,0.213],
+
+[42.825,0.190],
+
+[42.830,0.160],
+
+[42.818,0.130]
+
+];
+
+
+
+L.polyline(
+parcours,
+{
+color:'#245c3a',
+weight:5
+}
+).addTo(map);
+
+
+
+
+L.marker([42.821,0.213])
+.addTo(map)
+.bindPopup(
+"Départ : Lac d'Orédon"
+);
+
+
+
+L.marker([42.818,0.130])
+.addTo(map)
+.bindPopup(
+"Bivouac : Lac de Berseau"
+);
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>
