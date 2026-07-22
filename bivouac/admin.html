@@ -1,91 +1,498 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Résultats — Bivouac Pyrénées 2026</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>
+Résultats - Bivouac Pyrénées 2026
+</title>
+
+
+<link rel="stylesheet" href="css/style.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+
 </head>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+
+
+
 <body class="admin-page">
 
-  <nav class="topnav">
-    <a href="index.html" class="nav-logo">🏔️ Bivouac 2026</a>
-    <a href="vote.html" class="nav-link">🗳️ Voter</a>
-  </nav>
 
-  <div class="admin-wrap">
 
-    <div class="admin-header">
-      <h1>📊 Résultats des votes</h1>
-      <p id="totalVotes">Chargement…</p>
-      <button class="btn-refresh" onclick="loadResults()">🔄 Actualiser</button>
-    </div>
 
-    <!-- RÉSULTAT OPTIMAL -->
-    <div class="winner-card" id="winnerCard" style="display:none">
-      <div class="winner-crown">🏆</div>
-      <div class="winner-body">
-        <div class="winner-label">Meilleur choix</div>
-        <div class="winner-hike" id="winnerHike">—</div>
-        <div class="winner-date" id="winnerDate">—</div>
-        <div class="winner-detail" id="winnerDetail">—</div>
-      </div>
-    </div>
 
-    <div class="results-grid">
 
-      <!-- GRAPHIQUE ITINÉRAIRES -->
-      <div class="result-block">
-        <h3>🏔️ Itinéraires préférés</h3>
-        <div id="chartHikes" class="chart-wrap"></div>
-      </div>
+<header class="topnav">
 
-      <!-- GRAPHIQUE DATES -->
-      <div class="result-block">
-        <h3>📅 Disponibilités (week-ends)</h3>
-        <div id="chartDates" class="chart-wrap"></div>
-      </div>
 
-    </div>
+<a href="index.html" class="nav-logo">
 
-    <!-- TABLEAU DES PARTICIPANTS -->
-    <div class="result-block full-width">
-      <h3>👥 Participants (<span id="participantCount">0</span>)</h3>
-      <div class="table-wrap">
-        <table id="participantsTable">
-          <thead>
-            <tr>
-              <th>Prénom</th>
-              <th>Itinéraire(s)</th>
-              <th>Dates disponibles</th>
-              <th>Commentaire</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="participantsBody">
-            <tr><td colspan="5" class="empty-row">Aucun vote pour l'instant</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+🏔️ Bivouac Pyrénées
 
-    <!-- BOUTON RESET (admin seulement) -->
-    <div class="danger-zone">
-      <details>
-        <summary>⚙️ Options d'administration</summary>
-        <div style="margin-top:1rem">
-          <button class="btn-danger" onclick="resetAll()">🗑️ Supprimer tous les votes</button>
-        </div>
-      </details>
-    </div>
+</a>
 
-  </div>
 
-  <script src="js/firebase-config.js"></script>
-  <script src="js/admin.js"></script>
+
+<nav class="nav-menu">
+
+
+<a href="index.html" class="nav-link">
+
+Accueil
+
+</a>
+
+
+
+<a href="vote.html" class="nav-link">
+
+Voter
+
+</a>
+
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+
+
+
+
+<main class="admin-wrap">
+
+
+
+
+
+
+
+<section class="admin-header">
+
+
+<h1>
+
+📊 Résultats du bivouac
+
+</h1>
+
+
+
+<p id="totalVotes">
+
+Chargement...
+
+</p>
+
+
+
+<button 
+class="btn-primary"
+onclick="loadResults()">
+
+🔄 Actualiser
+
+</button>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- CHOIX GAGNANT -->
+
+<section 
+class="winner-card"
+id="winnerCard"
+style="display:none">
+
+
+<div class="winner-crown">
+
+🏆
+
+</div>
+
+
+
+<div>
+
+
+<div class="winner-label">
+
+DATE LA PLUS CHOISIE
+
+</div>
+
+
+
+<div 
+class="winner-hike"
+id="winnerHike">
+
+Lac de Berseau
+
+</div>
+
+
+
+<div 
+class="winner-date"
+id="winnerDate">
+
+-
+
+</div>
+
+
+
+
+<div 
+class="winner-detail"
+id="winnerDetail">
+
+-
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="results-grid">
+
+
+
+
+
+<div class="result-block">
+
+
+<h3>
+
+📅 Disponibilités du groupe
+
+</h3>
+
+
+
+<div 
+id="chartDates"
+class="chart-wrap">
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="result-block">
+
+
+<h3>
+
+🏕️ Parcours choisi
+
+</h3>
+
+
+
+<div class="route-summary">
+
+
+<h4>
+
+Lac de Berseau
+
+</h4>
+
+
+
+<p>
+
+🥾 Jour 1 :
+
+<br>
+
+Lac d'Orédon → Lac d'Aumar → montée vers le bivouac
+
+
+<br><br>
+
+
+🌙 Nuit :
+
+<br>
+
+Installation du campement au Lac de Berseau,
+repas collectif et coucher de soleil
+
+
+<br><br>
+
+
+🥾 Jour 2 :
+
+<br>
+
+Réveil en montagne puis retour vers le Lac d'Orédon
+
+</p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="result-block full-width">
+
+
+
+<h3>
+
+👥 Participants 
+(
+<span id="participantCount">
+0
+</span>
+)
+
+</h3>
+
+
+
+
+
+<div class="table-wrap">
+
+
+
+<table>
+
+
+
+<thead>
+
+
+<tr>
+
+<th>
+Prénom
+</th>
+
+
+<th>
+Parcours
+</th>
+
+
+<th>
+Dates disponibles
+</th>
+
+
+<th>
+Commentaire
+</th>
+
+
+<th>
+Action
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody id="participantsBody">
+
+
+<tr>
+
+
+<td colspan="5" class="empty-row">
+
+🏕️ Aucun vote pour l'instant
+
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section class="danger-zone">
+
+
+<details>
+
+
+<summary>
+
+⚙️ Administration
+
+</summary>
+
+
+
+<div style="margin-top:20px">
+
+
+<button
+
+class="btn-danger"
+
+onclick="resetAll()">
+
+🗑️ Supprimer tous les votes
+
+</button>
+
+
+</div>
+
+
+
+</details>
+
+
+</section>
+
+
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+
+
+© 2026 Bivouac Pyrénées
+
+<br>
+
+Organisation du bivouac Lac de Berseau
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- Firebase -->
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+
+
+<script src="js/firebase-config.js"></script>
+
+
+<script src="js/admin.js"></script>
+
+
+
+
 </body>
+
 </html>
