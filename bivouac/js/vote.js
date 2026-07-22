@@ -1,421 +1,325 @@
 // ============================================================
 // VOTE.JS
 // BIVOUAC PYRÉNÉES 2026
-// Lac de Berseau
+// Lac d'Orédon → Lac d'Aumar → Lac de Berseau
 // ============================================================
 
 
-let currentStep = 1;
+// ============================================================
+// VARIABLES
+// ============================================================
+
 
 let selectedDates = [];
 
-const TOTAL_STEPS = 3;
-
-
-
-// ============================================================
-// NAVIGATION ENTRE LES ÉTAPES
-// ============================================================
-
-
-function goStep(step){
-
-
-    // Validation prénom
-
-    if(currentStep === 1 && step > 1){
-
-
-        const prenom =
-        document.getElementById("inputPrenom")
-        .value
-        .trim();
-
-
-
-        if(!prenom){
-
-            alert(
-            "Entre ton prénom avant de continuer."
-            );
-
-            document
-            .getElementById("inputPrenom")
-            .focus();
-
-            return;
-
-        }
-
-    }
-
-
-
-    // Validation dates
-
-    if(currentStep === 2 && step > 2){
-
-
-        if(selectedDates.length === 0){
-
-
-            alert(
-            "Choisis au moins une date disponible."
-            );
-
-
-            return;
-
-
-        }
-
-
-        buildRecap();
-
-
-    }
-
-
-
-
-    document
-    .getElementById(
-        "step"+currentStep
-    )
-    ?.classList.remove("active");
-
-
-
-    document
-    .getElementById(
-        "pstep"+currentStep
-    )
-    ?.classList.remove("active");
-
-
-
-    document
-    .getElementById(
-        "pstep"+currentStep
-    )
-    ?.classList.add("done");
-
-
-
-
-    currentStep = step;
-
-
-
-    document
-    .getElementById(
-        "step"+currentStep
-    )
-    ?.classList.add("active");
-
-
-
-    document
-    .getElementById(
-        "pstep"+currentStep
-    )
-    ?.classList.add("active");
-
-
-
-    const percent =
-    ((currentStep-1)/(TOTAL_STEPS-1))*100;
-
-
-
-    document
-    .getElementById(
-        "progressFill"
-    )
-    .style.width =
-    percent+"%";
-
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-
-}
 
 
 
 
 // ============================================================
-// CALENDRIER DES DATES
+// CONSTRUCTION DU CALENDRIER
 // ============================================================
 
 
 function buildCalendar(){
 
 
-
-const aug =
-document.getElementById(
-"datesGridAug"
-);
+    const gridAug =
+    document.getElementById("datesGridAug");
 
 
-
-const sep =
-document.getElementById(
-"datesGridSep"
-);
+    const gridSep =
+    document.getElementById("datesGridSep");
 
 
 
-if(!aug || !sep)
-return;
+    if(!gridAug || !gridSep){
+
+        return;
+
+    }
 
 
 
 
-DATES_DATA.forEach(date=>{
-
-
-const button =
-document.createElement(
-"button"
-);
+    DATES_DATA.forEach(date => {
 
 
 
-button.className =
-"date-btn";
+        const button =
+        document.createElement("button");
 
 
 
-button.id =
-"dbtn-"+date.id;
+        button.className =
+        "date-btn";
 
 
 
-button.innerHTML = `
-
-<div class="date-day">
-Disponibilité
-</div>
-
-
-<div class="date-range">
-${date.label}
-</div>
-
-
-<div class="date-check"
-id="dchk-${date.id}">
-</div>
-
-`;
+        button.id =
+        "date-" + date.id;
 
 
 
-button.onclick =
-()=>toggleDate(date.id);
+        button.innerHTML = `
+
+
+            <div class="date-day">
+
+                ${date.label.split(" ")[0]}
+
+            </div>
+
+
+            <div class="date-range">
+
+                ${date.label}
+
+            </div>
+
+
+            <div class="date-check" id="check-${date.id}">
+
+            </div>
+
+
+        `;
 
 
 
-if(date.month==="aout")
-{
+        button.onclick = () => {
 
-aug.appendChild(button);
+            toggleDate(date.id);
+
+        };
+
+
+
+        const mois =
+        date.id.includes("08")
+        ?
+        "aout"
+        :
+        "septembre";
+
+
+
+        if(mois === "aout"){
+
+
+            gridAug.appendChild(button);
+
+
+        }
+
+        else{
+
+
+            gridSep.appendChild(button);
+
+
+        }
+
+
+
+    });
+
+
 
 }
 
-else
-{
-
-sep.appendChild(button);
-
-}
 
 
 
-});
 
 
 
-}
-
-
-
+// ============================================================
+// SELECTION DES DATES
+// ============================================================
 
 
 function toggleDate(id){
 
 
-const index =
-selectedDates.indexOf(id);
+
+    const index =
+    selectedDates.indexOf(id);
 
 
 
-const button =
-document.getElementById(
-"dbtn-"+id
-);
+    const button =
+    document.getElementById(
+        "date-" + id
+    );
 
 
 
-const check =
-document.getElementById(
-"dchk-"+id
-);
+    const check =
+    document.getElementById(
+        "check-" + id
+    );
 
 
 
-if(index === -1){
+    if(index === -1){
 
 
 
-selectedDates.push(id);
+        selectedDates.push(id);
 
 
 
-button.classList.add(
-"selected"
-);
+        button.classList.add(
+            "selected"
+        );
 
 
 
-check.textContent =
-"✓ Disponible";
+        check.textContent =
+        "✓ Disponible";
+
+
+    }
+
+
+    else{
+
+
+        selectedDates.splice(
+            index,
+            1
+        );
+
+
+
+        button.classList.remove(
+            "selected"
+        );
+
+
+
+        check.textContent =
+        "";
+
+    }
+
+
+
+    updateRecap();
 
 
 
 }
 
-else{
-
-
-selectedDates.splice(
-index,
-1
-);
 
 
 
-button.classList.remove(
-"selected"
-);
 
-
-
-check.textContent =
-"";
-
-
-}
-
-
-
-}
 
 
 
 
 // ============================================================
-// RÉCAPITULATIF
+// RÉCAPITULATIF AUTOMATIQUE
 // ============================================================
 
 
-function buildRecap(){
+function updateRecap(){
 
 
 
-const prenom =
-document
-.getElementById(
-"inputPrenom"
-)
-.value
-.trim();
+    const recap =
+    document.getElementById(
+        "voteRecap"
+    );
 
 
 
-const dates =
-selectedDates
-.map(id=>{
+    if(!recap){
 
+        return;
 
-const d =
-DATES_DATA.find(
-x=>x.id===id
-);
-
-
-return d ? d.label : id;
-
-
-})
-.join("<br>");
+    }
 
 
 
 
-document
-.getElementById(
-"voteRecap"
-)
-.innerHTML = `
-
-
-<div class="recap-row">
-
-👤
-
-<strong>
-Prénom :
-</strong>
-
-${prenom}
-
-</div>
-
-
-<div class="recap-row">
-
-🏔️
-
-<strong>
-Aventure :
-</strong>
-
-Bivouac Lac de Berseau
-
-</div>
+    const prenom =
+    document.getElementById(
+        "inputPrenom"
+    )
+    .value
+    .trim();
 
 
 
-<div class="recap-row">
 
-📅
-
-<strong>
-Dates possibles :
-</strong>
-
-<br>
-
-${dates}
-
-</div>
+    const dates =
+    selectedDates
+    .map(id => {
 
 
-`;
+        const date =
+        DATES_DATA.find(
+            d => d.id === id
+        );
+
+
+        return date
+        ?
+        date.label
+        :
+        "";
+
+    })
+    .join("<br>");
+
+
+
+
+
+    recap.innerHTML = `
+
+
+        <div class="recap-row">
+
+            👤 <strong>Prénom :</strong>
+
+            ${prenom || "Non renseigné"}
+
+        </div>
+
+
+        <div class="recap-row">
+
+            🏔️ <strong>Parcours :</strong>
+
+            Lac d'Orédon → Lac d'Aumar → Lac de Berseau
+
+        </div>
+
+
+        <div class="recap-row">
+
+            📅 <strong>Disponibilités :</strong>
+
+            <br>
+
+            ${dates || "Aucune date sélectionnée"}
+
+        </div>
+
+
+    `;
 
 
 
 }
+
+
+
+
 
 
 
@@ -430,37 +334,205 @@ async function submitVote(){
 
 
 
-const prenom =
-document
-.getElementById(
-"inputPrenom"
-)
-.value
-.trim();
-
-
-
-const comment =
-document
-.getElementById(
-"inputComment"
-)
-?.value
-.trim()
-|| "";
+    const prenom =
+    document.getElementById(
+        "inputPrenom"
+    )
+    .value
+    .trim();
 
 
 
 
-if(!prenom || selectedDates.length===0){
+    const comment =
+    document.getElementById(
+        "inputComment"
+    )
+    .value
+    .trim();
 
 
-alert(
-"Informations incomplètes."
-);
 
 
-return;
+
+    if(!prenom){
+
+
+        alert(
+            "Merci d'indiquer ton prénom."
+        );
+
+
+        document
+        .getElementById(
+            "inputPrenom"
+        )
+        .focus();
+
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+    if(selectedDates.length === 0){
+
+
+        alert(
+            "Sélectionne au moins une date disponible."
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+    const button =
+    document.querySelector(
+        ".btn-send"
+    );
+
+
+
+    button.disabled = true;
+
+
+    button.textContent =
+    "⏳ Enregistrement...";
+
+
+
+
+
+
+
+    const vote = {
+
+
+        prenom:prenom,
+
+
+        parcours:
+        "Lac d'Orédon → Lac d'Aumar → Lac de Berseau",
+
+
+        dates:selectedDates,
+
+
+        comment:comment
+
+
+    };
+
+
+
+
+
+
+    try{
+
+
+
+        await saveVote(
+            vote
+        );
+
+
+
+
+
+        document
+        .querySelector(
+            ".step-card"
+        )
+        .style.display =
+        "none";
+
+
+
+
+
+        const success =
+        document.getElementById(
+            "stepSuccess"
+        );
+
+
+
+        success.style.display =
+        "block";
+
+
+
+
+
+        document.getElementById(
+            "successMsg"
+        )
+        .textContent =
+
+
+        `Merci ${prenom} ! Ton choix a bien été enregistré. Les résultats seront visibles sur la page résultats.`;
+
+
+
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            error
+        );
+
+
+
+        alert(
+            "Erreur lors de l'enregistrement du vote."
+        );
+
+
+
+        button.disabled =
+        false;
+
+
+
+        button.textContent =
+        "✅ Envoyer mon choix";
+
+
+
+    }
+
 
 
 }
@@ -468,122 +540,13 @@ return;
 
 
 
-const button =
-document.querySelector(
-".btn-send"
-);
 
-
-
-button.disabled=true;
-
-button.textContent =
-"⏳ Enregistrement...";
-
-
-
-
-
-try{
-
-
-await saveVote({
-
-prenom:prenom,
-
-
-hikes:[
-"berseau"
-],
-
-
-dates:selectedDates,
-
-
-comment:comment
-
-
-
-});
-
-
-
-
-
-document
-.getElementById(
-"step3"
-)
-.classList.remove(
-"active"
-);
-
-
-
-document
-.getElementById(
-"stepSuccess"
-)
-.classList.add(
-"active"
-);
-
-
-
-
-document
-.getElementById(
-"progressFill"
-)
-.style.width =
-"100%";
-
-
-
-
-document
-.getElementById(
-"successMsg"
-)
-.textContent =
-
-`Merci ${prenom} ! 
-Ta disponibilité est enregistrée pour le bivouac du Lac de Berseau.`;
-
-
-
-}
-
-catch(error){
-
-
-console.error(error);
-
-
-alert(
-"Erreur lors de l'enregistrement."
-);
-
-
-button.disabled=false;
-
-
-button.textContent =
-"✅ Envoyer mon vote";
-
-
-
-}
-
-
-
-}
 
 
 
 
 // ============================================================
-// RESET
+// RESET VOTE
 // ============================================================
 
 
@@ -591,115 +554,88 @@ function resetVote(){
 
 
 
-selectedDates=[];
-
-currentStep=1;
+    selectedDates = [];
 
 
 
-
-document
-.getElementById(
-"inputPrenom"
-)
-.value="";
-
+    document
+    .getElementById(
+        "inputPrenom"
+    )
+    .value = "";
 
 
-if(document.getElementById("inputComment"))
-{
 
-document.getElementById(
-"inputComment"
-)
-.value="";
-
-}
+    document
+    .getElementById(
+        "inputComment"
+    )
+    .value = "";
 
 
 
 
-DATES_DATA.forEach(date=>{
 
-
-document
-.getElementById(
-"dbtn-"+date.id
-)
-?.classList.remove(
-"selected"
-);
+    document
+    .querySelector(
+        ".step-card"
+    )
+    .style.display =
+    "block";
 
 
 
-const check =
-document.getElementById(
-"dchk-"+date.id
-);
-
-
-
-if(check)
-check.textContent="";
-
-
-
-});
+    document
+    .getElementById(
+        "stepSuccess"
+    )
+    .style.display =
+    "none";
 
 
 
 
-document
-.getElementById(
-"stepSuccess"
-)
-.classList.remove(
-"active"
-);
+
+    DATES_DATA.forEach(date => {
 
 
 
-document
-.getElementById(
-"step1"
-)
-.classList.add(
-"active"
-);
+        const btn =
+        document.getElementById(
+            "date-" + date.id
+        );
 
 
 
-document
-.getElementById(
-"progressFill"
-)
-.style.width="0%";
+        const check =
+        document.getElementById(
+            "check-" + date.id
+        );
 
 
 
+        if(btn){
 
-document
-.querySelectorAll(
-".pstep"
-)
-.forEach((el,i)=>{
+            btn.classList.remove(
+                "selected"
+            );
 
-
-el.classList.remove(
-"active",
-"done"
-);
+        }
 
 
 
-if(i===0)
-el.classList.add(
-"active"
-);
+        if(check){
+
+            check.textContent =
+            "";
+
+        }
 
 
 
-});
+    });
+
+
 
 
 
@@ -708,182 +644,13 @@ el.classList.add(
 
 
 
-// ============================================================
-// CARTE LEAFLET
-// Lac d'Orédon → Lac d'Aumar → Lac de Berseau
-// ============================================================
-
-
-function initMap(){
-
-
-
-if(typeof L==="undefined")
-return;
-
-
-
-const element =
-document.getElementById(
-"map-berseau"
-);
-
-
-
-if(!element)
-return;
-
-
-
-
-const map =
-L.map(
-"map-berseau"
-)
-.setView(
-[
-42.835,
-0.15
-],
-13
-);
-
-
-
-
-
-L.tileLayer(
-"https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png",
-{
-
-attribution:
-"© OpenTopoMap",
-
-maxZoom:17
-
-}
-)
-.addTo(map);
-
-
-
-
-
-
-const route=[
-
-
-[42.819,0.184], // Orédon
-
-
-[42.831,0.176], // Aumar
-
-
-[42.842,0.161], // Aubert
-
-
-[42.850,0.145]  // Berseau
-
-
-];
-
-
-
-
-
-L.polyline(
-route,
-{
-
-color:"#245c3a",
-
-weight:5,
-
-opacity:0.85
-
-}
-)
-.addTo(map);
-
-
-
-
-
-
-const points=[
-
-
-
-{
-
-pos:[42.819,0.184],
-
-text:
-"Départ — Lac d'Orédon"
-
-},
-
-
-
-{
-
-pos:[42.831,0.176],
-
-text:
-"Passage — Lac d'Aumar"
-
-},
-
-
-
-{
-
-pos:[42.850,0.145],
-
-text:
-"Bivouac — Lac de Berseau"
-
-}
-
-
-];
-
-
-
-
-
-points.forEach(p=>{
-
-
-L.marker(
-p.pos
-)
-.addTo(map)
-.bindPopup(
-p.text
-);
-
-
-
-});
-
-
-
-
-map.fitBounds(
-route
-);
-
-
-
-}
 
 
 
 
 
 // ============================================================
-// INITIALISATION
+// EVENEMENTS
 // ============================================================
 
 
@@ -892,41 +659,26 @@ document.addEventListener(
 ()=>{
 
 
-buildCalendar();
-
-
-setTimeout(
-initMap,
-500
-);
+    buildCalendar();
 
 
 
-const input =
-document.getElementById(
-"inputPrenom"
-);
+    const prenom =
+    document.getElementById(
+        "inputPrenom"
+    );
 
 
-
-if(input){
-
-
-input.addEventListener(
-"keydown",
-e=>{
+    if(prenom){
 
 
-if(e.key==="Enter")
-goStep(2);
+        prenom.addEventListener(
+            "input",
+            updateRecap
+        );
 
 
-}
-);
-
-
-
-}
+    }
 
 
 
